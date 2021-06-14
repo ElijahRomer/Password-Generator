@@ -5,13 +5,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="assets/reset.css">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-  <div id="container">
-    <h1 class="UIitem">Random Password Generator!</h1>
-    <textarea name="passwordValue" id="passwordOutput" class="UIitem" placeholder = "Your Generated Password Will Appear Here." ></textarea>
-    <button id="UIitem submit">GET PASSWORD!</button>
+  <h1>Random Password Generator!</h1>
+  <div class="container">
+    <h2 class="UIitem">Generate Password</h2>
+    <textarea type="text" name="passwordValue" id="passwordOutput" class="UIitem" placeholder = "Your Generated Password Will Appear Here." readonly ></textarea>
+    <button id="submit" class ="UIitem">GET PASSWORD!</button>
   </div>
 
   <script src ="app.js"></script>

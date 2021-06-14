@@ -2,7 +2,7 @@ const charSets = {
   lowChar:'abcdefghijklmnopqrstuvwxyz',
   upChar:'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
   numChar:'1234567890',
-  specChar:'!@#$%^&*()-',
+  specChar:'!"@#$%^&*/+?,{~}|[]<>=:;.()-',
 };
 
 let userCharString = "";
@@ -10,7 +10,7 @@ let passwordLengthResponse;
 let passwordOutput = "";
 
 // BUTTON EVENT LISTENER
-document.getElementById('UIitem submit').addEventListener('click', generatePassword);
+document.getElementById('submit').addEventListener('click', generatePassword);
 
 function generatePassword () {
   userCharString = "";
@@ -18,12 +18,12 @@ function generatePassword () {
   howLongDoYouWantYourPassword();
   generatePasswordString();
   randomizer();
-  document.getElementById('passwordOutput').innerHTML = passwordOutput;
+  document.getElementById('passwordOutput').value = passwordOutput;
 }
 
 // ****GET PASSWORD LENGTH****
 function howLongDoYouWantYourPassword() {
-  passwordLengthResponse = prompt("Enter Desired Length of password, between 6 and 20 characters.");
+  passwordLengthResponse = prompt("Enter Desired Length of password, between 8 and 128 characters.");
   passwordLengthResponse = parseInt(passwordLengthResponse);
   //invalid characters
   if (isNaN(passwordLengthResponse) == true){
@@ -31,14 +31,14 @@ function howLongDoYouWantYourPassword() {
     howLongDoYouWantYourPassword();
   } 
   //invalid length
-  if (passwordLengthResponse < 6) {    
-    alert('Password length must be greater than 6.');
+  if (passwordLengthResponse < 8) {    
+    alert('Password length must be greater than 8.');
   howLongDoYouWantYourPassword();
-  } else if (passwordLengthResponse > 20) {
-    alert('Password length must be less than 20.');
+  } else if (passwordLengthResponse > 128) {
+    alert('Password length must be less than 128.');
   howLongDoYouWantYourPassword();}
   //input accepted
-  console.log(passwordLengthResponse);
+  alert(`Password length set to ${passwordLengthResponse} characters.`)
   return passwordLengthResponse
 };
 
@@ -47,38 +47,39 @@ function generatePasswordString(){
   let lowCharResponse = confirm('Do you want to include lower case letters?');
       if (lowCharResponse == true) {
         userCharString = userCharString + charSets.lowChar;
-        console.log(userCharString);
+        alert(`Lower case characters will be included.`);
       } else {
-        console.log('Lower Case Characters Omitted');
+        alert(`Lower case characters will NOT be included.`);
       };
   let upCharResponse = confirm('Do you want to include upper case letters?');
       if (upCharResponse == true) {
         userCharString = userCharString + charSets.upChar;
-        console.log(userCharString);
+        alert(`Upper case characters will be included.`);
       } else {
-        console.log('Upper Case Characters Omitted');
+        alert(`Upper case characters will NOT be included.`);
       };
   let numCharResponse = confirm('Do you want to include numbers?');
       if (numCharResponse == true) {
         userCharString = userCharString + charSets.numChar;
-        console.log(userCharString);
+        alert(`Numeric (0-9) characters will be included.`);
       } else {
-        console.log('Numbers Omitted');
+        alert(`Numeric (0-9) characters will NOT be included.`);
       };
   let specCharResponse = confirm('Do you want to include special characters?');
       if (specCharResponse == true) {
         userCharString = userCharString + charSets.specChar;
-        console.log(userCharString);
+        alert(`Special characters will be included.`);
       } else {
-        console.log('Special Characters Omitted');
+        alert(`Special characters will NOT be included.`);
       };
 //if no characters selected
 if (userCharString == ''){
     alert('User must make at least one selection for included characters.');
     generatePasswordString();
   } else {
-    // console.log(`The character string to be used for randomizer is ${userCharString}`);
+
     return userCharString;
+
   }
 };
 
@@ -87,15 +88,8 @@ if (userCharString == ''){
     
     for(i = 0; i < passwordLengthResponse; i++){
       let singlePasswordCharacter;
-      console.log(userCharString.length);
       singlePasswordCharacter = userCharString[Math.floor(Math.random()*userCharString.length)];
 
       passwordOutput = passwordOutput + singlePasswordCharacter;
-      
-    // console.log('randomizer has been triggered, iteration cycles should match passwordLengthResponse');
-
-    //console.log(`The character string to be used for randomizer is ${userCharString}`);
   };
 }
-
-console.log(Math.random()*userCharString.length);
